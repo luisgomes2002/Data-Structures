@@ -39,5 +39,5 @@ const partition = (array, start, end) => {
 };
 
 quickSort(array, 0, array.length - 1);
-
+array.push();
 console.log(`Finish: ${array}`);
