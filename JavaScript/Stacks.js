@@ -18,7 +18,7 @@ class Stack {
     for (let i = 0; i <= this.items.length - 1; i++) {
       this.items[i] = this.items[i + 1];
     }
-    this.items.length = this.items.length - 1; //Exclui o último item do array
+    this.items.length = this.items.length - 1;
   }
 
   search(item) {
@@ -32,7 +32,7 @@ class Stack {
   }
 
   empty() {
-    return this.items.length == 0;
+    return this.items.length === 0;
   }
 }
 
