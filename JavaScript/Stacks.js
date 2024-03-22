@@ -14,7 +14,7 @@ class Stack {
     }
   }
 
-  pop(item) {
+  pop() {
     for (let i = 0; i <= this.items.length - 1; i++) {
       this.items[i] = this.items[i + 1];
     }

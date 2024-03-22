@@ -1,5 +1,6 @@
 class Node {
   constructor(data) {
+    this.prev = null;
     this.data = data;
     this.next = null;
   }
@@ -21,6 +22,7 @@ class LinkedList {
         current = current.next;
       }
       current.next = newNode;
+      newNode.prev = current;
     }
     this.size++;
   }
@@ -34,7 +36,7 @@ class LinkedList {
   }
 
   insertAt(data, index) {
-    if (index < 0 || index > this.size) return;
+    if (index < 0 || index >= this.size) return;
 
     let newNode = new Node(data);
     if (this.head == null) {
@@ -50,25 +52,30 @@ class LinkedList {
       }
       newNode.next = current;
       previous.next = newNode;
+      newNode.prev = previous;
     }
     this.size++;
   }
 
   removeAt(data) {
     if (this.head == null) return;
+
     let current = this.head;
-    let prev = null;
+    let previous = null;
+
     if (current.data == data) {
       this.head = current.next;
       this.size--;
     }
+
     while (current != null && current.data !== data) {
-      prev = current;
+      previous = current;
       current = current.next;
     }
 
     if (current != null) {
-      prev.next = current.next;
+      current.next.prev = previous;
+      previous.next = current.next;
       this.size--;
     }
   }
@@ -83,20 +90,37 @@ class LinkedList {
     result += "null";
     console.log(result);
   }
+
+  printOneNode(index) {
+    if (index < 0 || index >= this.size) return;
+    let count = 0;
+    let current = this.head;
+
+    while (count < index) {
+      current = current.next;
+      count++;
+    }
+
+    let prevData = current.prev ? current.prev.data : "null";
+    let nextData = current.next ? current.next.data : "null";
+    console.log(`Nó: ${prevData} <- ${current.data} -> ${nextData}`);
+  }
 }
 
-const linkedList = new LinkedList(2);
+const linkedList = new LinkedList();
 console.log(linkedList.isEmpty());
 console.log(linkedList.getSize());
 linkedList.add(2);
-console.log(linkedList);
+// console.log(linkedList);
 linkedList.add(3);
-console.log(linkedList);
+// console.log(linkedList);
 linkedList.add(4);
 linkedList.add(20);
 linkedList.add(10);
+linkedList.print();
 linkedList.removeAt(4);
+// console.log(linkedList);
 linkedList.insertAt(1, 1);
-console.log(linkedList);
 console.log(linkedList.getSize());
 linkedList.print();
+linkedList.printOneNode(2);

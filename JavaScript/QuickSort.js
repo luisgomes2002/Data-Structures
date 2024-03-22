@@ -29,6 +29,7 @@ const partition = (array, start, end) => {
       array[i] = array[j];
       array[j] = temp;
     }
+    console.log(array);
   }
   i++;
   temp = array[i];
