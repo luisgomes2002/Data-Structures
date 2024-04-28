@@ -1,7 +1,5 @@
 #include <iostream>
 
-using namespace std;
-
 template <typename T>
 class Stack
 {
@@ -72,9 +70,9 @@ int main()
 	stack.push(20);
 	stack.push(30);
 
-	cout << stack.pop() << " popped from stack\n";
+	std::cout << stack.pop() << " popped from stack\n";
 
-	cout << "Top element is " << stack.peek() << endl;
+	std::cout << "Top element is " << stack.peek() << std::endl;
 
 	return 0;
 }
