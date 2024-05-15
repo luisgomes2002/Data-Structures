@@ -22,95 +22,101 @@ public:
 		size = 0;
 	}
 
-	void printList()
+	void printList();
+	void printOneNode(int index);
+	void addNode(int value);
+	void insertAt(Node *node, int value);
+	void removeNode();
+	int getSize();
+	bool isEmpty();
+};
+
+void LinkedList::printOneNode(int index)
+{
+	if (index < 0 || index >= size || head == nullptr)
 	{
-		Node *node = head;
-		std::cout << "LinkedList: ";
-		while (node != NULL)
-		{
-			std::cout << node->Value << " -> ";
-			node = node->Next;
-		}
-		std::cout << "NULL";
+		std::cout << "Error" << std::endl;
+		return;
 	}
 
-	void printOneNode(int index)
+	int count = 0;
+	Node *current = head;
+
+	while (count < index)
 	{
-		if (index < 0 || index >= size || head == nullptr)
-		{
-			std::cout << "Error" << std::endl;
-			return;
-		}
+		current = current->Next;
+		count++;
+	}
 
-		int count = 0;
+	if (current->Preview == nullptr)
+		std::cout << "NULL <- ";
+	else
+		std::cout << current->Preview->Value << " <- ";
+
+	std::cout << current->Value << " -> ";
+
+	if (current->Next == nullptr)
+		std::cout << "NULL\n";
+	else
+		std::cout << current->Next->Value << '\n';
+}
+
+void LinkedList::printList()
+{
+	Node *node = head;
+	std::cout << "LinkedList: ";
+	while (node != NULL)
+	{
+		std::cout << node->Value << " -> ";
+		node = node->Next;
+	}
+	std::cout << "NULL";
+}
+
+void LinkedList::addNode(int value)
+{
+	Node *newNode = new Node(value);
+	if (head == nullptr)
+	{
+		head = newNode;
+	}
+	else
+	{
 		Node *current = head;
-
-		while (count < index)
+		while (current->Next != nullptr)
 		{
 			current = current->Next;
-			count++;
 		}
-
-		if (current->Preview == nullptr)
-			std::cout << "NULL <- ";
-		else
-			std::cout << current->Preview->Value << " <- ";
-
-		std::cout << current->Value << " -> ";
-
-		if (current->Next == nullptr)
-			std::cout << "NULL\n";
-		else
-			std::cout << current->Next->Value << '\n';
+		current->Next = newNode;
+		newNode->Preview = current;
 	}
+	size++;
+}
 
-	void addNode(int value)
+void LinkedList::insertAt(Node *node, int value)
+{
+	Node *newNode = new Node(value);
+	if (head == nullptr)
 	{
-		Node *newNode = new Node(value);
-		if (head == nullptr)
-		{
-			head = newNode;
-		}
-		else
-		{
-			Node *current = head;
-			while (current->Next != nullptr)
-			{
-				current = current->Next;
-			}
-			current->Next = newNode;
-			newNode->Preview = current;
-		}
-		size++;
+		head = newNode;
 	}
-
-	void insertAt(Node **node, int value)
-	{
-		Node *newNode = new Node(value);
-		if (head == nullptr)
-		{
-			head = newNode;
-		}
-		else
-		{
-		}
-		size++;
-	}
-
-	void removeNode()
+	else
 	{
 	}
+	size++;
+}
 
-	int getSize()
-	{
-		return 0;
-	}
+void LinkedList::removeNode() {}
 
-	bool isEmpty()
-	{
-		return true;
-	}
-};
+int LinkedList::getSize()
+{
+	return 0;
+}
+
+bool LinkedList::isEmpty()
+{
+	return true;
+}
 
 int main()
 {
